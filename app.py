@@ -115,10 +115,7 @@ def datacenter():
 def smartcenter():
     return render_template('smartcenter.html')
 
-# 管理员界面
-@app.route('/admin')
-def admin():
-    return render_template('admin.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
