@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/base.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/scroll.css">
+    <link rel="stylesheet" href="static/css/histor.css">
+    <link rel="stylesheet" href="static/css/layui.css">
+    <link rel="stylesheet" href="static/css/date.css">
+    <!-- <link rel="stylesheet" href="static/css/info.css"> -->
+    <script src="static/js/shipei.js"></script>
+
+    <script src="static/js/echarts-4.2.1.min.js"></script>
+    <script type="text/javascript" src="static/js/stylelist.js"></script>
+</head>
+<body>
+    <div class="bg">
+        <!-- 顶部 -->
+        <div class="header">
+            <span class="header-title">海洋牧场监测可视化系统</span>
+            <span class="header-text">主要信息</span>
+        </div>
+        <!-- 内容 -->
+        <div class="wrap">
+            <!-- 左侧 -->
+            <div class="left fl">
+                <div class="left-header">
+                    <span>水文气象</span>
+                    <div id="left-header-nong" style="width: 100%;height: 100%;" class="left-header-nong"></div>
+                </div>
+                <div class="left-mid">
+                    <span>鱼群种类占比</span>
+                    <div id="left-mid-nong" style="width: 100%;height: 100%;" class="left-header-nong"></div>
+                </div>
+                <div class="left-bottom">
+                    <span>类型占比</span>
+                    <div id="left-bottom-nong" style="width: 100%;height: 100%;" class="left-header-nong"></div>
+                </div>
+            </div>
+            <!-- 中间 -->
+            <div class="center fl">
+                <!-- 地图 -->
+                <div class="center-map">
+                    <iframe src="static/112722-695433093_small.mp4" frameborder="0" height="100%" scrolling="no" width="100%" data-v-6a1f6f35=""></iframe>
+                </div>
+                <!-- 离线清单 -->
+                <div class="center-offline">
+                    <div class="center-offline-header">
+                        <p>投入鱼苗批次信息</p>
+                    </div>
+                    <div class="center-offline-mid">
+                        <div class="title">
+                            <div class="sit sit-title fl">Species</div>
+                            <div class="sit sit-title fl">Weight(g)</div>
+                            <div class="sit sit-title fl">Length1(cm)</div>
+                            <div class="sit sit-title fl">Width(cm)</div>
+                        </div>
+                                                <!-- 自动滚动清单列表 -->
+                        <div class="list" id="list">
+                            <div class="rowup" id="rowup">
+                                {% for fish in fish_info %}
+                                <ul class="list-item">
+                                    <li class="fl sit-item">{{ fish['Species'] }}</li>
+                                    <li class="fl sit-item">{{ fish['Weight(g)'] }}</li>
+                                    <li class="fl sit-item">{{ fish['Length1(cm)'] }}</li>
+                                    <li class="fl sit-item">{{ fish['Width(cm)'] }}</li>
+                                </ul>
+                                {% endfor %}
+                            </div>
+                            <div class="rowupcope" id="rowupcope"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="center-offline-bottom">
+                        <p><a href="/maininfo">水下信息</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- 右侧 -->
+            <div class="right fr">
+                <span class="right-title">牧场详情</span>
+                <div class="right-top">
+                    <div class="right-top-content">
+                        <span class="name">牧场名:</span>
+                        <span class="text">南开海洋牧场</span>
+                    </div>
+                    <div class="right-top-content">
+                        <span class="name">编号:</span>
+                        <span class="text">LOO33</span>
+                    </div>
+                    <div class="right-top-content">
+                        <span class="name">地址:</span>
+                        <span class="text">同砚路38号</span>
+                    </div>
+                    <div class="right-top-content">
+                        <span class="name">牧场管理员:</span>
+                        <span class="text">LotusLi</span>
+                    </div>
+                </div>
+                <div class="right-mid">
+                    <div class="right-mid-header">
+                        硬件信息
+                    </div>
+                    <div class="right-mid-scroll">
+                        <div class="right-mid-content">
+                            <div class="right-top-content">
+                                <span class="name">网箱长度(m):</span>
+                                <span class="text">100</span>
+                            </div>
+                            <div class="right-top-content">
+                                <span class="name">网箱宽度（m）:</span>
+                                <span class="text">50</span>
+                            </div>
+                            <div class="right-top-content">
+                                <span class="name">网箱深度（m）:</span>
+                                <span class="text">30</span>
+                            </div>
+                            <div class="right-top-content">
+                                <span class="name">网箱经度</span>
+                                <span class="text">128.033</span>
+                            </div>
+                            <div class="right-top-content">
+                                <span class="name">网箱维度：</span>
+                                <span class="text">56.321</span>
+                            </div>
+                            <div class="right-top-content">
+                                <span class="name">监测摄像头数量：</span>
+                                <span class="text">77</span>
+                            </div>
+                            <div class="right-top-content">
+                                <span class="name">空气相对湿度:</span>
+                                <span class="text">48.7%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/maininfo" class="history" id="triggerBtn">查看详细信息</a>
+                </div>
+                <div class="right-bottom">
+                    <div class="right-mid-header">
+                        实时监控
+                    </div>
+                    <div class="right-bottom-content">
+                        <img src="static/picture/jiankong.png" alt="">
+                    </div>
+                    <a href="/maininfo" class="history-pic" id="triggerBtnpic">查看详细信息</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框历史数据 -->
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="model-header">查看历史记录</div>
+            <div class="see">
+                <div class="from fl">
+                    <div class="line fl">
+                        <span>站名：</span>
+                        <select name="name" id="" class="line-content">
+                            <option value="">西红柿观测站</option>
+                        </select>
+                    </div>
+                    <div class="line fl">
+                        <span>要素：</span>
+                        <select name="name" id="" class="line-content">
+                            <option value="">7</option>
+                        </select>
+                    </div>
+                    <div class="line fl">
+                        <span>开始时间:</span>
+                        <input type="text" name="date" id="date" lay-verify="date" placeholder="" autocomplete="off"
+                            class="line-content" />
+                    </div>
+                    <div class="line fl">
+                        <span>结束时间:</span>
+                        <input type="text" name="date" id="date1" lay-verify="date" placeholder="" autocomplete="off"
+                            class="line-content" />
+                    </div>
+                </div>
+                <div class="see-right fr">
+                    <div class="submit fr">
+                        <input type="button" class="button" value="导出">
+                    </div>
+                    <div class="submit fr query">
+                        <input type="button" class="button" value="查询">
+                    </div>
+                </div>
+            </div>
+            <div class="date">
+                <div class="date-content" id="date-content-wrap">
+                    <div id="data-content-line" style="width: 100%;height: 98%;" class="data-content-line"></div>
+                </div>
+            </div>
+
+            <div id="closeBtn" class="close">X</div>
+        </div>
+    </div>
+    <!-- 模态框历史图片 -->
+    <div id="myModalpic" class="modalpic">
+        <div class="modal-content">
+            <div class="model-header">查看历史图片</div>
+            <div class="see">
+                <div class="from fl">
+                    <div class="line fl">
+                        <span>站名：</span>
+                        <select name="name" id="" class="line-content">
+                            <option value="">西红柿观测站</option>
+                        </select>
+                    </div>
+                    <div class="line fl">
+                        <span>要素：</span>
+                        <select name="name" id="" class="line-content">
+                            <option value="">7</option>
+                        </select>
+                    </div>
+                    <div class="line fl">
+                        <span>开始时间:</span>
+                        <input type="text" name="date" id="date2" lay-verify="date" placeholder="" autocomplete="off"
+                            class="line-content" />
+                    </div>
+                    <div class="line fl">
+                        <span>结束时间:</span>
+                        <input type="text" name="date" id="date3" lay-verify="date" placeholder="" autocomplete="off"
+                            class="line-content" />
+                    </div>
+                </div>
+                <div class="see-right fr">
+                    <div class="submit fr querypic">
+                        <input type="button" class="button" value="查询">
+                    </div>
+                </div>
+            </div>
+            <!-- 历史图片 -->
+            <div class="date">
+                <div class="data-contentpic">
+                    <div class="date-content-pic fl">
+                        <img src="static/picture/lishitupian.jpg" alt="">
+                    </div>
+                    <div class="date-content-pic fl">
+                        <img src="static/picture/lishitupian.jpg" alt="">
+                    </div>
+                    <div class="date-content-pic fl">
+                        <img src="static/picture/lishitupian.jpg" alt="">
+                    </div>
+                    <div class="date-content-pic fl">
+                        <img src="static/picture/lishitupian.jpg" alt="">
+                    </div>
+                    <div class="date-content-pic fl">
+                        <img src="static/picture/lishitupian.jpg" alt="">
+                    </div>
+                    <div class="date-content-pic fl">
+                        <img src="static/picture/lishitupian.jpg" alt="">
+                    </div>
+                    <div class="date-content-pic fl">
+                        <img src="static/picture/lishitupian.jpg" alt="">
+                    </div>
+                    <div class="date-content-pic fl">
+                        <img src="static/picture/lishitupian.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div id="closeBtnpic" class="close">X</div>
+        </div>
+    </div>
+    </div>
+</body>
+<script src="static/js/jquery-1.10.2.js"></script>
+<script src="static/js/bar.js"></script>
+<script src="static/js/pie.js"></script>
+<script src="static/js/pinhuan.js"></script>
+<script src="static/js/map.js"></script>
+<script type="text/javascript" src="static/js/infobox.js"></script>
+<script src="static/js/histroy.js"></script>
+<script src="static/js/histroyline.js"></script>
+<script src="static/js/layui.js"></script>
+<script src="static/js/date.js"></script>
+<script src="static/js/gundong.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/js/bootstrap.min.js"></script>
+</html>
